@@ -1,0 +1,18 @@
+{
+    "student@unibook.edu": {
+        "id": "U1001",
+        "name": "John Doe",
+        "phone": "+1234567890",
+        "email": "student@unibook.edu",
+        "password": "$2y$10$mu9gnImhvAuF\/kLdJymDp.wrqitJ03mdUTMYDor1L1pp4YhVtGCNm",
+        "role": "user"
+    },
+    "staff@unibook.edu": {
+        "id": "U1002",
+        "name": "Jane Smith",
+        "phone": "+1987654321",
+        "email": "staff@unibook.edu",
+        "password": "$2y$10$vIg\/YjNAkntw5GfHEk7Bzu4SO6RGu6OVKGm4NG0SgCngT9oR0ONMO",
+        "role": "user"
+    }
+}
