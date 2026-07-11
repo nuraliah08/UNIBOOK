@@ -66,4 +66,4 @@ Uni.Book is a web-based system that lets universities manage the booking of shar
 
 ## Contact
 
-- Support Email: unibook@gmail.com
+- Support Email: unibook776@gmail.com
