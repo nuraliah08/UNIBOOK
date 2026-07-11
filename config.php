@@ -36,7 +36,7 @@ ob_start(function($buffer) {
   </style>
   <footer class="app-shared-footer">
     <p style="margin: 5px 0;">2026 © Uni.Book</p>
-    <p style="margin: 5px 0;">Contact Us: <a href="mailto:unibook@gmail.com">unibook@gmail.com</a></p>
+    <p style="margin: 5px 0;">Contact Us: <a href="mailto:unibook776@gmail.com">unibook776@gmail.com</a></p>
   </footer>';
         
         // Remove existing footer(s) if present
