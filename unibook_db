@@ -1,0 +1,375 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Jul 07, 2026 at 04:37 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `unibook_db`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `bookings`
+-- (See below for the actual view)
+--
+CREATE TABLE `bookings` (
+`booking_id` varchar(13)
+,`user_id` varchar(12)
+,`user_email` varchar(255)
+,`user_name` varchar(255)
+,`resource_id` varchar(15)
+,`resource_name` varchar(255)
+,`category` varchar(100)
+,`date` date
+,`slot` varchar(100)
+,`booking_purpose` text
+,`amount` decimal(10,2)
+,`booking_status` enum('Pending','Confirmed','Completed','Rejected','Declined','Pending Review','Approved','Cancelled')
+,`payment_method` varchar(50)
+,`payment_bank` varchar(100)
+,`transaction_reference` varchar(100)
+,`payment_status` enum('Unpaid','Pending Cash Verification','Paid','Refund Requested','Refunded')
+,`pickup_address` varchar(255)
+,`payment_date` datetime
+,`receipt_id` varchar(50)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bookings_data`
+--
+
+CREATE TABLE `bookings_data` (
+  `booking_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `resource_id` int(11) NOT NULL,
+  `booking_date` date NOT NULL,
+  `booking_slot` varchar(100) NOT NULL,
+  `booking_purpose` text DEFAULT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `booking_status` enum('Pending','Confirmed','Completed','Rejected','Declined','Pending Review','Approved','Cancelled') NOT NULL DEFAULT 'Pending',
+  `payment_status` enum('Unpaid','Pending Cash Verification','Paid','Refund Requested','Refunded') NOT NULL DEFAULT 'Unpaid',
+  `payment_date` datetime DEFAULT NULL,
+  `receipt_id` varchar(50) DEFAULT NULL,
+  `payment_method` varchar(50) DEFAULT NULL,
+  `payment_bank` varchar(100) DEFAULT NULL,
+  `transaction_reference` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `bookings_data`
+--
+
+INSERT INTO `bookings_data` (`booking_id`, `user_id`, `resource_id`, `booking_date`, `booking_slot`, `booking_purpose`, `amount`, `booking_status`, `payment_status`, `payment_date`, `receipt_id`, `payment_method`, `payment_bank`, `transaction_reference`) VALUES
+(1028, 1009, 59, '2026-06-20', '2:00 PM – 4:00 PM', NULL, 100.00, 'Completed', 'Paid', '2026-06-19 15:39:19', 'RC55775', 'ToyyibPay', 'FPX', 'TP2606194732911370'),
+(1029, 1010, 16, '2026-06-25', '4:00 PM – 6:00 PM', NULL, 50.00, 'Completed', 'Paid', '2026-06-19 15:42:10', 'RC26365', 'Card', 'Card', 'CARD-604345'),
+(1031, 1011, 31, '2026-06-20', '5 Days', NULL, 800.00, 'Completed', 'Paid', '2026-06-19 15:46:45', 'RC81663', 'ToyyibPay', 'FPX', 'TP2606194298232837'),
+(1032, 1011, 20, '2026-06-21', '2:00 PM – 4:00 PM', NULL, 150.00, 'Cancelled', 'Unpaid', NULL, NULL, NULL, NULL, NULL),
+(1033, 1011, 31, '2026-06-25', '2 Days', NULL, 320.00, 'Completed', 'Refunded', '2026-06-19 18:44:30', 'RC73041', 'Card', 'Card', 'CARD-751825'),
+(1034, 1011, 35, '2026-06-30', '5 Days', NULL, 600.00, 'Completed', 'Refunded', '2026-06-19 18:56:24', 'RC42138', 'Card', 'Card', 'CARD-423848'),
+(1035, 1011, 30, '2026-06-24', '4 Days', NULL, 600.00, 'Completed', 'Paid', '2026-06-19 18:58:45', 'RC97749', 'Card', 'Card', 'CARD-417653'),
+(1036, 1011, 55, '2026-06-23', '4:00 PM – 6:00 PM', NULL, 200.00, 'Cancelled', 'Refunded', '2026-06-19 19:00:44', 'RC58549', 'Card', 'Card', 'CARD-687149'),
+(1037, 1011, 27, '2026-06-23', '10:00 AM – 12:00 PM', NULL, 25.00, 'Completed', 'Paid', '2026-06-20 10:25:28', 'RC80644', 'ToyyibPay', 'FPX', 'TP2606204416176184'),
+(1038, 1011, 15, '2026-06-20', '2:00 PM – 4:00 PM', NULL, 80.00, 'Cancelled', 'Refunded', '2026-06-20 10:27:06', 'RC77777', 'Card', 'Card', 'CARD-842860'),
+(1039, 1011, 34, '2026-06-30', '1 Day', NULL, 85.00, 'Cancelled', 'Refunded', '2026-06-20 11:14:38', 'RC32769', 'ToyyibPay', 'FPX', 'TP2606202317406361'),
+(1040, 1011, 17, '2026-06-27', '10:00 AM – 12:00 PM', NULL, 75.00, 'Completed', 'Paid', '2026-06-20 11:19:52', 'RC18245', 'ToyyibPay', 'FPX', 'TP2606203340569128'),
+(1041, 1011, 1, '2026-06-21', '2:00 PM – 4:00 PM', NULL, 90.00, 'Pending Review', 'Unpaid', NULL, NULL, NULL, NULL, NULL),
+(1042, 1011, 1, '2026-06-23', '4:00 PM – 6:00 PM', NULL, 90.00, 'Pending Review', 'Unpaid', NULL, NULL, NULL, NULL, NULL),
+(1043, 1011, 1, '2026-06-30', '4:00 PM – 6:00 PM', NULL, 90.00, 'Approved', 'Paid', '2026-06-20 12:52:25', 'RC52072', 'ToyyibPay', 'FPX', 'TP2606200376521578'),
+(1044, 1014, 15, '2026-06-26', '10:00 AM – 12:00 PM', NULL, 80.00, 'Approved', 'Paid', '2026-06-21 15:55:33', 'RC25727', 'ToyyibPay', 'FPX', 'TP2606214813573147'),
+(1045, 1014, 30, '2026-06-23', '1 Day', NULL, 150.00, 'Approved', 'Paid', '2026-06-22 16:47:48', 'RC37279', 'ToyyibPay', 'FPX', 'TP2606221029715026'),
+(1046, 1014, 16, '2026-06-30', '10:00 AM – 12:00 PM', NULL, 50.00, 'Approved', 'Paid', '2026-06-22 18:21:28', 'RC34310', 'ToyyibPay', 'FPX', 'TP2606234598062226'),
+(1047, 1014, 16, '2026-07-22', '10:00 AM – 12:00 PM', NULL, 50.00, 'Approved', 'Paid', '2026-06-24 15:12:11', 'RC82259', 'Card', 'Card', 'CARD-206426'),
+(1048, 1016, 58, '2026-06-30', '2:00 PM – 4:00 PM', NULL, 90.00, 'Approved', 'Unpaid', NULL, NULL, NULL, NULL, NULL),
+(1049, 1014, 15, '2026-07-15', '2:00 PM – 4:00 PM', 'For robotic workshop', 80.00, 'Approved', 'Unpaid', NULL, NULL, NULL, NULL, NULL),
+(1050, 1009, 16, '2026-07-09', '10:00 AM – 12:00 PM', 'Tutorial session', 50.00, 'Completed', 'Paid', '2026-07-08 09:12:03', 'RC90211', 'ToyyibPay', 'FPX', 'TP2607084923718201'),
+(1051, 1011, 16, '2026-07-15', '2:00 PM – 4:00 PM', 'Group study', 50.00, 'Approved', 'Paid', '2026-07-14 11:30:45', 'RC90212', 'Card', 'Card', 'CARD-118822'),
+(1052, 1013, 16, '2026-07-22', '4:00 PM – 6:00 PM', NULL, 50.00, 'Pending Review', 'Unpaid', NULL, NULL, NULL, NULL, NULL),
+(1053, 1016, 16, '2026-07-31', '10:00 AM – 12:00 PM', 'Makeup class', 50.00, 'Cancelled', 'Refunded', '2026-07-25 14:02:19', 'RC90213', 'ToyyibPay', 'FPX', 'TP2607254411882736'),
+(1054, 1010, 30, '2026-07-10', '1 Day', 'Field trip transport', 150.00, 'Approved', 'Paid', '2026-07-09 08:45:10', 'RC90214', 'Card', 'Card', 'CARD-118904'),
+(1055, 1012, 30, '2026-07-18', '2 Days', NULL, 300.00, 'Pending', 'Unpaid', NULL, NULL, NULL, NULL, NULL),
+(1056, 1014, 30, '2026-07-24', '1 Day', 'Sports event shuttle', 150.00, 'Completed', 'Paid', '2026-07-23 16:20:37', 'RC90215', 'ToyyibPay', 'FPX', 'TP2607235871029384'),
+(1057, 1009, 30, '2026-07-30', '3 Days', NULL, 450.00, 'Cancelled', 'Refunded', '2026-07-26 10:11:52', 'RC90216', 'Card', 'Card', 'CARD-119045'),
+(1058, 1011, 42, '2026-07-11', '10:00 AM – 12:00 PM', 'Seminar presentation', 67.00, 'Completed', 'Paid', '2026-07-10 09:55:24', 'RC90217', 'ToyyibPay', 'FPX', 'TP2607104229817362'),
+(1059, 1013, 42, '2026-07-17', '2:00 PM – 4:00 PM', NULL, 67.00, 'Approved', 'Paid', '2026-07-16 13:41:08', 'RC90218', 'Card', 'Card', 'CARD-119130'),
+(1060, 1015, 42, '2026-07-25', '4:00 PM – 6:00 PM', 'Guest lecture', 67.00, 'Pending Review', 'Unpaid', NULL, NULL, NULL, NULL, NULL),
+(1061, 1016, 42, '2026-07-31', '10:00 AM – 12:00 PM', NULL, 67.00, 'Declined', 'Unpaid', NULL, NULL, NULL, NULL, NULL),
+(1062, 1010, 59, '2026-07-12', '2:00 PM – 4:00 PM', 'Guest speaking engagement', 100.00, 'Approved', 'Paid', '2026-07-11 15:30:00', 'RC90219', 'ToyyibPay', 'FPX', 'TP2607114529871655'),
+(1063, 1012, 59, '2026-07-20', '10:00 AM – 12:00 PM', NULL, 100.00, 'Completed', 'Paid', '2026-07-19 08:22:41', 'RC90220', 'Card', 'Card', 'CARD-119287'),
+(1064, 1014, 59, '2026-07-27', '4:00 PM – 6:00 PM', 'Panel discussion', 100.00, 'Pending', 'Unpaid', NULL, NULL, NULL, NULL, NULL),
+(1065, 1009, 59, '2026-07-31', '2:00 PM – 4:00 PM', NULL, 100.00, 'Cancelled', 'Refunded', '2026-07-28 12:10:33', 'RC90221', 'ToyyibPay', 'FPX', 'TP2607284871029354');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `category_id` int(11) NOT NULL,
+  `category_name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`category_id`, `category_name`) VALUES
+(4, 'Equipment'),
+(1, 'Facilities'),
+(3, 'Personnel'),
+(2, 'Vehicles');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `resources`
+--
+
+CREATE TABLE `resources` (
+  `resource_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `price` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `image` varchar(255) DEFAULT NULL,
+  `status` enum('Available','Unavailable') NOT NULL DEFAULT 'Available',
+  `pickup_address` varchar(255) DEFAULT NULL,
+  `uploaded_by` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `resources`
+--
+
+INSERT INTO `resources` (`resource_id`, `category_id`, `name`, `description`, `price`, `image`, `status`, `pickup_address`, `uploaded_by`) VALUES
+(1, 1, 'UiTM Auditorium', 'Main auditorium for convocations, seminars, and university events.', 90.00, '1781873304_auditorium.jpg', 'Unavailable', 'Aras 1, Bangunan Canseleri, UiTM Shah Alam.', 1005),
+(15, 1, 'Engineering Workshop', 'Workshop facility for practical and technical training sessions. Location: Aras Bawah, Fakulti Kejuruteraan, UiTM Shah Alam.', 80.00, '1781873486_bengkel.jpg', 'Available', 'Aras Bawah, Fakulti Kejuruteraan, UiTM Shah Alam.', 1005),
+(16, 1, 'Lecture Room', 'Standard classroom for lectures and academic sessions.', 50.00, '1781873657_bilikkuliah.jpg', 'Available', 'Aras 2, Bangunan Akademik 1, UiTM Shah Alam.', 1005),
+(17, 1, 'Meeting Room', 'Dedicated meeting space for staff discussions and administrative purposes.', 75.00, '1781873694_bilikmeeting.jpg', 'Available', 'Aras 3, Bangunan Pentadbiran, UiTM Shah Alam.', 1005),
+(18, 1, 'Carrel Study Room', 'Individual study space for students conducting research and revision.', 15.00, '1781873752_carrelroom.jpg', 'Available', 'Perpustakaan Tun Abdul Razak, Aras 4, UiTM Shah Alam.', 1005),
+(19, 1, 'Multipurpose Hall', 'Large hall for examinations, assemblies, and university functions.', 350.00, '1781873796_dewan.jpg', 'Available', 'Dewan Seri Budiman, UiTM Shah Alam.', 1005),
+(20, 1, 'Dining Hall', 'Dining facility serving meals for students and staff.', 150.00, '1781873832_dewanmakan.jpg', 'Available', 'Kompleks Pelajar, UiTM Shah Alam.', 1005),
+(21, 1, 'Discussion Room', 'Collaborative room for group assignments and project discussions.', 75.00, '1781873864_discussionroom.jpg', 'Available', 'Perpustakaan Tun Abdul Razak, Aras 2, UiTM Shah Alam.', 1005),
+(22, 1, 'Guest Room', 'Accommodation room for visiting lecturers and university guests.', 95.00, '1781873910_guestroom.jpg', 'Available', 'Kompleks Penginapan Tetamu, UiTM Shah Alam.', 1005),
+(23, 1, 'Gymnasium', 'Indoor sports and fitness facility for university activities.', 60.00, '1781873944_gymnasiumroom.jpg', 'Available', 'Kompleks Sukan UiTM Shah Alam.', 1005),
+(24, 1, 'IT Laboratory', 'Computer laboratory equipped for software development and practical learning.', 45.00, '1781873975_itlab.jpg', 'Available', 'Fakulti Sains Komputer dan Matematik, Aras 2, UiTM Shah Alam.', 1005),
+(25, 1, 'IT Support Room', 'Facility for IT administration, networking, and technical support operations.', 65.00, '1781874008_itroom.jpg', 'Available', 'Pusat Teknologi Maklumat, UiTM Shah Alam.', 1005),
+(26, 1, 'Smart Classroom', 'Modern classroom equipped with smart boards and digital learning technology.', 40.00, '1781874039_smartclassroom.jpg', 'Available', 'Bangunan Akademik 2, Aras 3, UiTM Shah Alam.', 1005),
+(27, 1, 'Student Activity Center', 'Venue for student clubs, leadership programs, and extracurricular activities.', 25.00, '1781874067_studentactivity.jpg', 'Available', 'Pusat Aktiviti Pelajar, UiTM Shah Alam.', 1005),
+(28, 1, 'Multimedia Studio', 'Recording and production studio for media, broadcasting, and creative projects.', 45.00, '1781874109_studio.jpg', 'Available', 'Fakulti Komunikasi dan Pengajian Media, UiTM Shah Alam.', 1005),
+(29, 2, 'UiTM Campus Bus 01', 'University shuttle bus for student transportation between faculties and residential colleges.', 160.00, '1781874281_bas1.jpg', 'Available', 'Depot Pengangkutan, UiTM Shah Alam.', 1006),
+(30, 2, 'UiTM Campus Bus 02', 'Shuttle bus serving academic and administrative zones within the campus.', 150.00, '1781874321_bas2.jpg', 'Available', 'Depot Pengangkutan, UiTM Shah Alam.', 1006),
+(31, 2, 'UiTM Express Bus 03', 'Express campus bus for peak-hour transportation and special events.', 160.00, '1781874347_bas3.jpg', 'Available', 'Depot Pengangkutan, UiTM Shah Alam.', 1006),
+(32, 2, 'Official Vehicle 01', 'Official university sedan for administrative and management duties.', 85.00, '1781874394_car1.jpg', 'Available', 'Unit Kenderaan Rasmi, Bangunan Pentadbiran, UiTM Shah Alam.', 1006),
+(33, 2, 'Official Vehicle 02', 'University staff vehicle used for meetings, inspections, and official travel.', 85.00, '1781874421_car2.jpg', 'Available', 'Unit Kenderaan Rasmi, UiTM Shah Alam.', 1006),
+(34, 2, 'Executive Vehicle 03', 'Executive-use vehicle for university leadership and VIP transportation.', 85.00, '1781874446_car3.jpg', 'Available', 'Unit Kenderaan Rasmi, UiTM Shah Alam.', 1006),
+(35, 2, 'UiTM Van 1', 'Passenger van used for student activities, clubs, and academic visits.', 120.00, '1781874514_van1.jpg', 'Available', 'Pusat Aktiviti Pelajar, UiTM Shah Alam.', 1006),
+(36, 2, 'Event Support Van', 'Multi-purpose van supporting university events and outreach programs.', 87.00, '1781874557_van2.jpg', 'Available', 'Kompleks Sukan dan Rekreasi, UiTM Shah Alam.', 1006),
+(37, 2, 'Student Affairs Van 02', 'Passenger van used for student activities, clubs, and academic visits.', 120.00, '1781874595_van3.jpg', 'Available', 'Pusat Aktiviti Pelajar, UiTM Shah Alam.', 1006),
+(38, 4, 'UiTM Audio System', 'Professional audio system used for lectures, seminars, conferences, and university events.', 60.00, '1781874705_audiosystem.jpg', 'Available', 'Multimedia Unit, Fakulti Komunikasi dan Pengajian Media, UiTM Shah Alam.', 1007),
+(39, 4, 'UiTM Camera', 'Digital camera for photography, videography, and event documentation. Brand: Canon EOS R10.', 50.00, '1781874766_camera.jpg', 'Available', 'Multimedia Unit, Fakulti Komunikasi dan Pengajian Media, UiTM Shah Alam.', 1007),
+(40, 4, 'UiTM Laptop', 'Portable laptop for presentations, teaching, and administrative work. Brand: Dell Latitude 5440.', 25.00, '1781874801_laptop.jpg', 'Available', 'ICT Service Counter, Pusat Teknologi Maklumat, UiTM Shah Alam.', 1007),
+(41, 4, 'UiTM Microphone', 'Wireless microphone set suitable for lectures and public speaking. Brand: Shure BLX24/SM58.', 40.00, '1781874835_mic.jpg', 'Available', 'Audio Visual Unit, Dewan Seri Budiman, UiTM Shah Alam.', 1007),
+(42, 4, 'UiTM Projector', 'High-definition projector for classrooms, seminars, and conferences. Brand: Epson EB-FH52.', 67.00, '1781874867_projector.jpg', 'Available', 'Teaching Equipment Store, Bangunan Akademik 2, UiTM Shah Alam.', 1007),
+(43, 4, 'UiTM Speaker', 'Portable PA speaker system for indoor and outdoor university activities. Brand: JBL EON710.', 50.00, '1781874894_speaker.jpg', 'Available', 'Media & Event Equipment Store, Aras 1, Kompleks Budisiswa, UiTM Shah Alam', 1007),
+(44, 4, 'UiTM WiFi Access Point', 'Wireless networking device for temporary internet connectivity during events and workshops. Brand: Ubiquiti UniFi U6 Lite.', 35.00, '1781874923_wifi.jpg', 'Available', 'Operations Centre, Pusat Teknologi Maklumat, UiTM Shah Alam.', 1007),
+(49, 3, 'Dr. Siti Hajar', 'Corporate Communications Officer supporting public relations and university events.', 70.00, '1781875235_Person5.jpg', 'Available', 'Corporate Communications Unit, UiTM Shah Alam.', 1008),
+(50, 3, 'Mr. Daniel Lim', 'Information Technology Officer providing support for campus systems and digital services.', 80.00, '1781875271_Person6.jpg', 'Available', 'Information Technology Centre, UiTM Shah Alam.', 1008),
+(55, 3, 'Assoc. Prof. Dr. Khairul Anwar', 'Deputy Dean for Academic Affairs, responsible for academic planning and quality assurance. Office: Faculty Administration Building, UiTM Shah Alam.', 200.00, '1781875743_Person7.jpg', 'Available', 'Faculty Administration Building, UiTM Shah Alam.', 1008),
+(56, 3, 'Mr. Azlan Iskandar', 'Finance Manager overseeing budgeting, procurement, and financial operations.', 70.00, '1781875784_Person8.jpg', 'Available', 'Finance Department, UiTM Shah Alam.', 1008),
+(57, 3, 'Ms. Sarah Tan', 'Marketing and Student Recruitment Executive managing outreach and promotional activities.', 80.00, '1781875815_person9.jpg', 'Available', 'Marketing and Recruitment Unit, UiTM Shah Alam.', 1008),
+(58, 3, 'Ms. Jasmine Lee', 'Project Management Officer coordinating strategic initiatives and institutional partnerships.', 90.00, '1781875839_person10.jpg', 'Available', 'Strategic Planning Office, UiTM Shah Alam.', 1008),
+(59, 3, 'Dr. Ahmad Faizal', 'Senior Lecturer in the Faculty of Business and Management.', 100.00, '1781876044_Person1.jpg', 'Available', 'Room 3-12, Faculty of Business Building, UiTM Shah Alam.', 1008),
+(60, 3, 'Mr. Hafiz Rahman', 'Administrative Officer responsible for student affairs and campus engagement programs.', 85.00, '1781876072_Person2.jpg', 'Available', 'Student Affairs Division, UiTM Shah Alam.', 1008),
+(61, 3, 'Dr. Syed Amirul', 'Research Coordinator managing innovation projects and industry collaborations.', 150.00, '1781876101_Person3.jpg', 'Available', 'Research Management Centre, UiTM Shah Alam.', 1008),
+(62, 3, 'Puan Nurul Aisyah', 'Human Resource Executive overseeing staff development and training initiatives. Office: Human Resource Department, UiTM Shah Alam.', 100.00, '1781876123_Person4.jpg', 'Available', 'Human Resource Department, UiTM Shah Alam.', 1008);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `roles`
+--
+
+CREATE TABLE `roles` (
+  `role_id` int(11) NOT NULL,
+  `role_name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`role_id`, `role_name`) VALUES
+(1, 'admin'),
+(3, 'manager'),
+(2, 'user');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `phone` varchar(50) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role_id` int(11) NOT NULL,
+  `department` varchar(255) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `name`, `phone`, `email`, `password`, `role_id`, `department`, `category_id`) VALUES
+(1005, 'Facilities Manager', NULL, 'facilitiesmanager@unibook.com', '$2y$10$a/9zcDMVSGYeJn7ER0xZou9mDW.9/8cO5laiHL7NkJOWWp8mXRs2S', 3, 'Facilities Management Office', 1),
+(1006, 'Transport Manager', NULL, 'transportmanager@unibook.com', '$2y$10$a/9zcDMVSGYeJn7ER0xZou9mDW.9/8cO5laiHL7NkJOWWp8mXRs2S', 3, 'Transport Unit', 2),
+(1007, 'ICT Manager', NULL, 'ictmanager@unibook.com', '$2y$10$a/9zcDMVSGYeJn7ER0xZou9mDW.9/8cO5laiHL7NkJOWWp8mXRs2S', 3, 'Pusat Teknologi Maklumat (ICT Centre)', 4),
+(1008, 'HR Manager', NULL, 'hrmanager@unibook.com', '$2y$10$a/9zcDMVSGYeJn7ER0xZou9mDW.9/8cO5laiHL7NkJOWWp8mXRs2S', 3, 'Human Resource Department', 3),
+(1009, 'Salsabila Binti Hasrulnizam', '01232323456', 'salsabilabintihasrulnizam@gmail.com', '$2y$10$mJdIcey9QyLiZ9HG1NvWjuhIm/HH99I1AaP0tdYRTJpPlCQinAszi', 2, NULL, NULL),
+(1010, 'Aliah Nadhirah', '0123456789', 'aliahnad@gmail.com', '$2y$10$LOxo4IjgZiuqTM9Px95rXeSPgG14RGLSqNB5Q3Gr5M.Bq7CzALgHu', 2, NULL, NULL),
+(1011, 'Syaza Amira', '01234543234', 'sza@gmail.com', '$2y$10$hDWuiBmQbP2urdmoppy2DOumtHPwtek0wuY7c6yh2yNDlD0rmT2uu', 2, NULL, NULL),
+(1012, 'martin j edwards', '0123456', 'oasis@gmail.com', '$2y$10$bVOIf.bdti08ucgRpY1v3.bU8z0UfTIgo3IQ2A0TW2pyu5rGpRWau', 2, NULL, NULL),
+(1013, 'sarah', '123456', 'sarah@gmail.com', '$2y$10$Wfwu8xOrx4wMkcspt37KNejXZS/vKfEJp/W/i3uo43DCtIKLw7A0K', 2, NULL, NULL),
+(1014, 'salsabila@gmail.com', '0123456', 'salsabila@gmail.com', '$2y$10$k8L5/vnb89Vezsi8SCK6re1MEP3ksSXoRC4.BryG2rTtW8oc2T4OG', 2, NULL, NULL),
+(1015, 'Test User', '1234567890', 'testuser_1522@unibook.edu', '$2y$10$90/w7XK9UwsCC.VaE4jMPeHk.G6xbLLbvpfmeNOnlY./WaeIY7.9q', 2, NULL, NULL),
+(1016, 'Amira', '0123456', 'amira@gmail.com', '$2y$10$wvnSn5N6lcVu9M/Y4IShvOcbGPIEgnpSbt3FWE6urBadd3av5EY66', 2, NULL, NULL),
+(1017, 'Sofia', '0345678', 'kolegmanager@unibook.com', '$2y$10$IDrQj7.eHLlpHQTulX2.ZuWndTXecY/yWw8fxPA/n3hzl/MJXBLLG', 3, 'Unit Kolej Kediaman', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `bookings`
+--
+DROP TABLE IF EXISTS `bookings`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `bookings`  AS SELECT concat('UB',`b`.`booking_id`) FROM (((`bookings_data` `b` join `users` `u` on(`b`.`user_id` = `u`.`user_id`)) join `resources` `r` on(`b`.`resource_id` = `r`.`resource_id`)) join `categories` `c` on(`r`.`category_id` = `c`.`category_id`)) ;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `bookings_data`
+--
+ALTER TABLE `bookings_data`
+  ADD PRIMARY KEY (`booking_id`),
+  ADD KEY `idx_bookings_user` (`user_id`),
+  ADD KEY `idx_bookings_resource` (`resource_id`),
+  ADD KEY `idx_bookings_date_slot` (`booking_date`,`booking_slot`),
+  ADD KEY `idx_bookings_status` (`booking_status`),
+  ADD KEY `idx_bookings_payment_status` (`payment_status`);
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`category_id`),
+  ADD UNIQUE KEY `category_name` (`category_name`);
+
+--
+-- Indexes for table `resources`
+--
+ALTER TABLE `resources`
+  ADD PRIMARY KEY (`resource_id`),
+  ADD KEY `fk_resources_category` (`category_id`);
+
+--
+-- Indexes for table `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`role_id`),
+  ADD UNIQUE KEY `role_name` (`role_name`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD KEY `fk_users_role` (`role_id`),
+  ADD KEY `fk_users_category` (`category_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `bookings_data`
+--
+ALTER TABLE `bookings_data`
+  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1067;
+
+--
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `resources`
+--
+ALTER TABLE `resources`
+  MODIFY `resource_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+
+--
+-- AUTO_INCREMENT for table `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1018;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `bookings_data`
+--
+ALTER TABLE `bookings_data`
+  ADD CONSTRAINT `fk_bookings_resource` FOREIGN KEY (`resource_id`) REFERENCES `resources` (`resource_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_bookings_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `resources`
+--
+ALTER TABLE `resources`
+  ADD CONSTRAINT `fk_resources_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `fk_users_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_users_role` FOREIGN KEY (`role_id`) REFERENCES `roles` (`role_id`) ON UPDATE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
